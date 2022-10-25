@@ -1,11 +1,19 @@
 const {
   postLoginSchema,
+  postUserSchema,
 } = require('./schema');
 
 const validatePostLogin = async (req, res, next) => {
   const objInputPost = req.body;
   const { error } = postLoginSchema.validate(objInputPost);
   if (error) return res.status(400).json({ message: 'Some required fields are missing' });
+  return next();
+};
+
+const validatePostUser = async (req, res, next) => {
+  const objInputPost = req.body;
+  const { error } = postUserSchema.validate(objInputPost);
+  if (error) return res.status(400).json({ message: error.message });
   return next();
 };
 
@@ -18,5 +26,5 @@ const validatePostLogin = async (req, res, next) => {
 
 module.exports = {
   validatePostLogin,
-  // validatePutXXX,
+  validatePostUser,
 };
