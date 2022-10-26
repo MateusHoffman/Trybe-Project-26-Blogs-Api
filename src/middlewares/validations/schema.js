@@ -26,6 +26,12 @@ const postCategoriesSchema = Joi.object({
   name: inputNameSchemaCategories,
 });
 
+const postPostSchema = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+  categoryIds: Joi.required(),
+});
+
 // const putXXXSchema = Joi.object({
 //   inputName: idSchema,
 //   inputName: idSchema,
@@ -35,4 +41,5 @@ module.exports = {
   postLoginSchema,
   postUserSchema,
   postCategoriesSchema,
+  postPostSchema,
 };

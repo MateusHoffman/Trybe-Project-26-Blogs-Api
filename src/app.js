@@ -1,5 +1,7 @@
 const express = require('express');
-const { loginRouter, userRouter, categoriesRouter } = require('./routers');
+const {
+  loginRouter, userRouter, categoriesRouter, postRouter,
+} = require('./routers');
 
 // ...
 
@@ -10,6 +12,7 @@ app.use(express.json());
 app.use('/login', loginRouter);
 app.use('/user', userRouter);
 app.use('/categories', categoriesRouter);
+app.use('/post', postRouter);
 
 app.use((err, req, res, _next) => {
   res.status(err.status || 500).json({ message: err.message });

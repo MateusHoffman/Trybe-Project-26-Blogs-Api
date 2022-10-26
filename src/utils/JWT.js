@@ -11,8 +11,8 @@ const generateToken = (name, email) => {
 
 const authenticateToken = (token) => {
   try {
-    jwt.verify(token, secret);
-    return true;
+    const objUser = jwt.verify(token, secret);
+    return { isValidToken: true, objUser };
    } catch (error) {
      return false;
    }
