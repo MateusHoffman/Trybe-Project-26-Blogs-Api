@@ -1,7 +1,7 @@
 const express = require('express');
 const { loginRouter, userRouter, categoriesRouter } = require('./routers');
 
-// ....
+// ...
 
 const app = express();
 
