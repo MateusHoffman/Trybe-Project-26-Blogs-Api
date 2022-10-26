@@ -22,10 +22,20 @@ const postPost = async ({ title, content, categoryIds }, { authorization }) => {
   return { status: 201, response: postObj };
 };
 
-// const getAllUser = async () => {
-//   const allUsers = await User.findAll({ attributes: { exclude: 'password' } });
-//   return { status: 200, response: allUsers };
-// };
+const getAllPost = async () => {
+  const allPost = await BlogPost.findAll({
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: 'password' },
+    }, {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] },
+    }],
+  });
+  return { status: 200, response: allPost };
+};
 
 // const getOneUser = async (id) => {
 //   const user = await User.findOne({ where: { id }, attributes: { exclude: 'password' } });
@@ -35,6 +45,6 @@ const postPost = async ({ title, content, categoryIds }, { authorization }) => {
 
 module.exports = {
   postPost,
-  // getAllUser,
+  getAllPost,
   // getOneUser,
 };

@@ -5,10 +5,10 @@ const postPost = async (req, res) => {
   res.status(status).json(response);
 };
 
-// const getAllUser = async (req, res) => {
-//   const { status, response } = await userService.getAllUser(req.body);
-//   res.status(status).json(response);
-// };
+const getAllPost = async (req, res) => {
+  const { status, response } = await postService.getAllPost();
+  res.status(status).json(response);
+};
 
 // const getOneUser = async (req, res) => {
 //   const { status, response } = await userService.getOneUser(req.params.id);
@@ -17,6 +17,6 @@ const postPost = async (req, res) => {
 
 module.exports = {
   postPost,
-  // getAllUser,
+  getAllPost,
   // getOneUser,
 };
