@@ -15,8 +15,16 @@ const getOnePost = async (req, res) => {
   res.status(status).json(response);
 };
 
+const putPost = async (req, res) => {
+  const { status, response } = await postService.putPost(
+    req.body, req.params.id, req.headers.authorization,
+  );
+  res.status(status).json(response);
+};
+
 module.exports = {
   postPost,
   getAllPost,
   getOnePost,
+  putPost,
 };

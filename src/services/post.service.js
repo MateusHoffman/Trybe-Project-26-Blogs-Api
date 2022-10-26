@@ -54,8 +54,26 @@ const getOnePost = async (id) => {
   return { status: 200, response: post };
 };
 
+const putPost = async (objPut, postId, token) => {
+  const objPost = await BlogPost.findOne({
+    where: { id: postId },
+    include: [{ model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] },
+    }],
+  });
+  const { objUser: { name, email } } = authenticateToken(token);
+  const { id } = await User.findOne(
+    { where: { displayName: name, email }, attributes: ['id'] },
+  );
+  if (objPost.userId !== id) return { status: 401, response: { message: 'Unauthorized user' } };
+  await objPost.update(objPut);
+
+  return { status: 200, response: objPost };
+};
+
 module.exports = {
   postPost,
   getAllPost,
   getOnePost,
+  putPost,
 };

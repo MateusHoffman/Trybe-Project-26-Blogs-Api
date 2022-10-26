@@ -3,6 +3,7 @@ const {
   postUserSchema,
   postCategoriesSchema,
   postPostSchema,
+  putPostSchema,
 } = require('./schema');
 
 const validatePostLogin = async (req, res, next) => {
@@ -33,16 +34,17 @@ const validatePostPost = async (req, res, next) => {
   return next();
 };
 
-// const validatePutXXX = async (req, res, next) => {
-//   const objInputPut = req.body;
-//   const { error } = putXXXSchema.validate(objInputPut);
-//   if (error) return res.status(123).json({ message: error.message });
-//   return next();
-// };
+const validatePutPost = async (req, res, next) => {
+  const objInput = req.body;
+  const { error } = putPostSchema.validate(objInput);
+  if (error) return res.status(400).json({ message: 'Some required fields are missing' });
+  return next();
+};
 
 module.exports = {
   validatePostLogin,
   validatePostUser,
   validatePostCategories,
   validatePostPost,
+  validatePutPost,
 };
