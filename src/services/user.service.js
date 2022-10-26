@@ -11,6 +11,12 @@ const postUser = async ({ displayName, email, password, image }) => {
   return { status: 201, response: { token } };
 };
 
+const getAllUser = async () => {
+  const allUsers = await User.findAll({ attributes: { exclude: 'password' } });
+  return { status: 200, response: allUsers };
+};
+
 module.exports = {
   postUser,
+  getAllUser,
 };
