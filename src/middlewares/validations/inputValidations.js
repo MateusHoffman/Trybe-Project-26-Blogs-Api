@@ -1,6 +1,7 @@
 const {
   postLoginSchema,
   postUserSchema,
+  postCategoriesSchema,
 } = require('./schema');
 
 const validatePostLogin = async (req, res, next) => {
@@ -17,6 +18,13 @@ const validatePostUser = async (req, res, next) => {
   return next();
 };
 
+const validatePostCategories = async (req, res, next) => {
+  const objInputPost = req.body;
+  const { error } = postCategoriesSchema.validate(objInputPost);
+  if (error) return res.status(400).json({ message: error.message });
+  return next();
+};
+
 // const validatePutXXX = async (req, res, next) => {
 //   const objInputPut = req.body;
 //   const { error } = putXXXSchema.validate(objInputPut);
@@ -27,4 +35,5 @@ const validatePostUser = async (req, res, next) => {
 module.exports = {
   validatePostLogin,
   validatePostUser,
+  validatePostCategories,
 };
