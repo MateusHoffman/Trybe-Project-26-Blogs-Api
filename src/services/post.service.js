@@ -37,14 +37,25 @@ const getAllPost = async () => {
   return { status: 200, response: allPost };
 };
 
-// const getOneUser = async (id) => {
-//   const user = await User.findOne({ where: { id }, attributes: { exclude: 'password' } });
-//   if (!user) return { status: 404, response: { message: 'User does not exist' } };
-//   return { status: 200, response: user };
-// };
+const getOnePost = async (id) => {
+  const post = await BlogPost.findOne({
+    where: { id },
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: 'password' },
+    }, {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] },
+    }],
+  });
+  if (!post) return { status: 404, response: { message: 'Post does not exist' } };
+  return { status: 200, response: post };
+};
 
 module.exports = {
   postPost,
   getAllPost,
-  // getOneUser,
+  getOnePost,
 };

@@ -10,13 +10,13 @@ const getAllPost = async (req, res) => {
   res.status(status).json(response);
 };
 
-// const getOneUser = async (req, res) => {
-//   const { status, response } = await userService.getOneUser(req.params.id);
-//   res.status(status).json(response);
-// };
+const getOnePost = async (req, res) => {
+  const { status, response } = await postService.getOnePost(req.params.id);
+  res.status(status).json(response);
+};
 
 module.exports = {
   postPost,
   getAllPost,
-  // getOneUser,
+  getOnePost,
 };
