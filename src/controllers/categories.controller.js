@@ -5,10 +5,10 @@ const postCategories = async (req, res) => {
   res.status(status).json(response);
 };
 
-// const getAllUser = async (req, res) => {
-//   const { status, response } = await userService.getAllUser(req.body);
-//   res.status(status).json(response);
-// };
+const getAllCategories = async (req, res) => {
+  const { status, response } = await categoriesService.getAllCategories();
+  res.status(status).json(response);
+};
 
 // const getOneUser = async (req, res) => {
 //   const { status, response } = await userService.getOneUser(req.params.id);
@@ -17,6 +17,6 @@ const postCategories = async (req, res) => {
 
 module.exports = {
   postCategories,
-  // getAllUser,
+  getAllCategories,
   // getOneUser,
 };

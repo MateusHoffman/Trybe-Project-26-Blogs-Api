@@ -1,17 +1,17 @@
-// const { Category } = require('../models');
+const { Category } = require('../models');
 // const { generateToken } = require('../utils/JWT');
 
 const postCategories = async ({ name }) => {
   const addInfos = { name };
-  // await Category.create(addInfos);
-  // const findNewCategory = await Category.findOne({ where: { name } });
-  return { status: 201, response: addInfos };
+  await Category.create(addInfos);
+  const findNewCategory = await Category.findOne({ where: { name } });
+  return { status: 201, response: findNewCategory };
 };
 
-// const getAllUser = async () => {
-//   const allUsers = await User.findAll({ attributes: { exclude: 'password' } });
-//   return { status: 200, response: allUsers };
-// };
+const getAllCategories = async () => {
+  const allCategories = await Category.findAll();
+  return { status: 200, response: allCategories };
+};
 
 // const getOneUser = async (id) => {
 //   const user = await User.findOne({ where: { id }, attributes: { exclude: 'password' } });
@@ -21,6 +21,6 @@ const postCategories = async ({ name }) => {
 
 module.exports = {
   postCategories,
-  // getAllUser,
+  getAllCategories,
   // getOneUser,
 };
