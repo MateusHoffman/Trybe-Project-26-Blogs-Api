@@ -71,9 +71,22 @@ const putPost = async (objPut, postId, token) => {
   return { status: 200, response: objPost };
 };
 
+const deletePost = async (postId, token) => {
+  const objPost = await BlogPost.findOne({ where: { id: postId } });
+  if (!objPost) return { status: 404, response: { message: 'Post does not exist' } };
+  const { objUser: { name, email } } = authenticateToken(token);
+  const { id } = await User.findOne(
+    { where: { displayName: name, email }, attributes: ['id'] },
+  );
+  if (objPost.userId !== id) return { status: 401, response: { message: 'Unauthorized user' } };
+  await BlogPost.destroy({ where: { id: postId } });
+  return { status: 204 };
+};
+
 module.exports = {
   postPost,
   getAllPost,
   getOnePost,
   putPost,
+  deletePost,
 };

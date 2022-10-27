@@ -22,9 +22,17 @@ const putPost = async (req, res) => {
   res.status(status).json(response);
 };
 
+const deletePost = async (req, res) => {
+  const { status, response } = await postService.deletePost(
+    req.params.id, req.headers.authorization,
+  );
+  res.status(status).json(response);
+};
+
 module.exports = {
   postPost,
   getAllPost,
   getOnePost,
   putPost,
+  deletePost,
 };
