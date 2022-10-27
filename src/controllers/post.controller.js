@@ -29,10 +29,16 @@ const deletePost = async (req, res) => {
   res.status(status).json(response);
 };
 
+const getQueryPost = async (req, res) => {
+  const { status, response } = await postService.getQueryPost(req.query);
+  res.status(status).json(response);
+};
+
 module.exports = {
   postPost,
   getAllPost,
   getOnePost,
   putPost,
   deletePost,
+  getQueryPost,
 };
